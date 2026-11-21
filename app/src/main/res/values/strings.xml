@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Speed Booster</string>
+    <string name="app_subtitle">Keeps your Hutch connection awake</string>
+    <string name="tile_label">Booster</string>
+    <string name="tile_on">On</string>
+    <string name="tile_off">Off</string>
+
+    <string name="notif_channel">Background service</string>
+    <string name="notif_title">Speed Booster is running</string>
+    <string name="notif_text">Open the app to see status and score</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+
+    <string name="battery_title">Battery optimization is on</string>
+    <string name="battery_body">Android may pause or kill the booster in the background. Turn off battery optimization for uninterrupted use.</string>
+    <string name="battery_button">Turn off battery optimization</string>
+    <string name="battery_dialog_title">Turn off battery optimization?</string>
+    <string name="battery_open">Open settings</string>
+    <string name="battery_anyway">Start anyway</string>
+    <string name="recents_lock">If clearing Recents closes it, lock the app in Recents (long-press or swipe down on its card and tap the lock).</string>
+    <string name="oem_xiaomi">On Xiaomi / Redmi / POCO also enable Autostart and set Battery saver to \"No restrictions\" in App info.</string>
+    <string name="oem_samsung">On Samsung also set Battery to \"Unrestricted\" and keep the app out of \"Sleeping apps\".</string>
+    <string name="oem_huawei">On Huawei / Honor also set App launch to \"Manage manually\" with all switches on.</string>
+    <string name="oem_oppo">On Oppo / Realme / OnePlus also allow Auto-launch and background activity.</string>
+    <string name="oem_vivo">On Vivo / iQOO also allow High background power consumption.</string>
+
+    <string name="stat_last">Last</string>
+    <string name="stat_avg">Average</string>
+    <string name="stat_jitter">Jitter</string>
+    <string name="stat_loss">Loss</string>
+    <string name="stat_sent">Sent / OK</string>
+    <string name="stat_uptime">Uptime</string>
+
+    <string name="settings">Settings</string>
+    <string name="boost_mode">Boost mode</string>
+    <string name="boost_mode_desc">Pick how hard the app keeps your connection awake.</string>
+    <string name="profile_gaming">Gaming</string>
+    <string name="profile_gaming_desc">Lowest lag for games and calls. Uses more battery.</string>
+    <string name="profile_aggressive">Aggressive</string>
+    <string name="profile_aggressive_desc">Strongest keep-alive for heavy browsing and downloads.</string>
+    <string name="profile_balanced">Balanced</string>
+    <string name="profile_balanced_desc">Recommended. Keeps Hutch fast with normal battery use.</string>
+    <string name="profile_relaxed">Relaxed</string>
+    <string name="profile_relaxed_desc">Battery friendly. A light keep-alive.</string>
+    <string name="profile_custom">Custom</string>
+    <string name="profile_custom_desc">Set your own options under Advanced.</string>
+    <string name="advanced_show">Advanced settings ▾</string>
+    <string name="advanced_hide">Advanced settings ▴</string>
+    <string name="advanced_note">For experienced users. Changing anything here switches Boost mode to Custom.</string>
+    <string name="restore_defaults">Restore defaults</string>
+    <string name="config_summary_profile">Boost mode: %1$s  ›</string>
+    <string name="back">Back</string>
+    <string name="battery_setting">Battery optimization</string>
+    <string name="battery_state_on">On. Tap to turn off for uninterrupted use.</string>
+    <string name="battery_state_off">Off. The booster can run uninterrupted.</string>
+    <string name="developed_by">Developed by Mujahideen Razick · github.com/mecdeen</string>
+    <string name="mode_http">Web request</string>
+    <string name="mode_icmp">Ping</string>
+    <string name="target_url">Website address</string>
+    <string name="target_host">Server to ping</string>
+    <string name="interval">Every (seconds)</string>
+    <string name="interval_hint_http">HTTP: minimum 1 s. Default is 20 s.</string>
+    <string name="interval_hint_icmp">ICMP: minimum 0.1 s. Use a host that answers pings: Hutch 1 and 2 are Hutch\'s own servers; \"Hutch DNS (auto)\" pings the DNS servers of your SIM connection.</string>
+    <string name="apply">Apply</string>
+    <string name="saved">Saved. Applied live.</string>
+    <string name="reset_done">Defaults restored</string>
+    <string name="invalid_interval">Enter a valid interval</string>
+    <string name="invalid_target">Enter a target</string>
+    <string name="tip">Tip: add the \"Booster\" tile to Quick Settings. Turning it off there stops the booster and closes the app completely.</string>
+
+    <string name="status_stopped">Stopped</string>
+    <string name="status_starting">Starting…</string>
+    <string name="label_no_data">No data</string>
+    <string name="label_excellent">Excellent</string>
+    <string name="label_good">Good</string>
+    <string name="label_fair">Fair</string>
+    <string name="label_poor">Poor</string>
+    <string name="next_in">Next request in %1$d s</string>
+    <string name="every">Sending every %1$s s</string>
+</resources>

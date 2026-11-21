@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#F4F6FA</color>
+    <color name="card">#FFFFFF</color>
+    <color name="text_primary">#14181F</color>
+    <color name="text_secondary">#5C6470</color>
+    <color name="track">#E6E9EF</color>
+    <color name="banner_bg">#FFF1E0</color>
+    <color name="accent">#FF6A00</color>
+    <color name="good">#1F9D55</color>
+    <color name="warn">#D9930D</color>
+    <color name="bad">#E0484D</color>
+    <color name="idle">#9AA3AE</color>
+    <color name="option_selected_bg">#FFF4EB</color>
+</resources>

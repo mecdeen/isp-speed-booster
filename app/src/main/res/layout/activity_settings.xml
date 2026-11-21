@@ -87,6 +87,28 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
+        <!-- Lock in Recents -->
+        <LinearLayout
+            android:id="@+id/lockRow"
+            style="@style/Card"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lock_setting"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lockState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <!-- Advanced (collapsed by default) -->
         <TextView
             android:id="@+id/advancedToggle"

@@ -40,7 +40,6 @@ object BatteryHelper {
 
     fun message(context: Context): String {
         val base = context.getString(R.string.battery_body)
-        val oem = oemHint(context)?.let { "\n\n$it" }.orEmpty()
-        return "$base$oem\n\n${context.getString(R.string.recents_lock)}"
+        return oemHint(context)?.let { "$base\n\n$it" } ?: base
     }
 }

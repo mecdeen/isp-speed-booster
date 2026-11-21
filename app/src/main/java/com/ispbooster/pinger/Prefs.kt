@@ -47,6 +47,22 @@ class Prefs(context: Context) {
         get() = sp.getBoolean(KEY_SHOULD_RUN, false)
         set(value) { sp.edit().putBoolean(KEY_SHOULD_RUN, value).commit() }
 
+    /** User said they locked the app in Recents. Cleared again if we detect we were killed anyway. */
+    val lockConfirmed: Boolean
+        get() = sp.getBoolean(KEY_LOCK_CONFIRMED, false)
+
+    /** The booster was killed while it should have been running (e.g. Recents cleared without a lock). */
+    val killedUnexpectedly: Boolean
+        get() = sp.getBoolean(KEY_KILLED, false)
+
+    fun confirmLock() {
+        sp.edit().putBoolean(KEY_LOCK_CONFIRMED, true).putBoolean(KEY_KILLED, false).apply()
+    }
+
+    fun markKilledUnexpectedly() {
+        sp.edit().putBoolean(KEY_KILLED, true).putBoolean(KEY_LOCK_CONFIRMED, false).apply()
+    }
+
     val profile: Profile
         get() = Profile.entries.firstOrNull { it.name == sp.getString(KEY_PROFILE, null) }
             // Fresh install: Balanced. Upgrade from a build without profiles: keep the user's values as Custom.
@@ -106,6 +122,8 @@ class Prefs(context: Context) {
         private const val KEY_INTERVAL = "interval_ms"
         private const val KEY_SHOULD_RUN = "should_run"
         private const val KEY_PROFILE = "profile"
+        private const val KEY_LOCK_CONFIRMED = "lock_confirmed"
+        private const val KEY_KILLED = "killed_unexpectedly"
         const val HUTCH_PING_HOST = "103.21.167.134"
 
         fun minIntervalMs(mode: Mode) = if (mode == Mode.HTTP) 1_000L else 100L

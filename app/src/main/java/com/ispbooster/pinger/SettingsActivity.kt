@@ -59,6 +59,7 @@ class SettingsActivity : Activity() {
 
         findViewById<View>(R.id.backButton).setOnClickListener { finish() }
         findViewById<View>(R.id.batteryRow).setOnClickListener { BatteryHelper.requestIgnore(this) }
+        findViewById<View>(R.id.lockRow).setOnClickListener { RecentsLock.showGuide(this, prefs) { renderLockState() } }
         advancedToggle.setOnClickListener { setAdvancedVisible(advancedSection.visibility != View.VISIBLE) }
         findViewById<Button>(R.id.applyButton).setOnClickListener { if (applyAdvanced()) toast(R.string.saved) }
         findViewById<Button>(R.id.resetButton).setOnClickListener {
@@ -97,6 +98,17 @@ class SettingsActivity : Activity() {
         super.onResume()
         batteryState.setText(
             if (BatteryHelper.isIgnoringOptimizations(this)) R.string.battery_state_off else R.string.battery_state_on,
+        )
+        renderLockState()
+    }
+
+    private fun renderLockState() {
+        findViewById<TextView>(R.id.lockState).setText(
+            when {
+                prefs.lockConfirmed -> R.string.lock_state_on
+                RecentsLock.isRelevant(prefs) -> R.string.lock_state_off
+                else -> R.string.lock_state_na
+            },
         )
     }
 

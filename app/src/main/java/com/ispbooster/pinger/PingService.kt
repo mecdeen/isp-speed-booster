@@ -61,6 +61,9 @@ class PingService : Service() {
             else -> {
                 if (Build.VERSION.SDK_INT >= 26 && intent?.action == ACTION_RESTART) goForeground() // required for startForegroundService
                 if (prefs.shouldRun) {
+                    // A fresh service (stopped) that should be running means our process was killed:
+                    // most likely Recents was cleared without the app being locked.
+                    if (stopped) prefs.markKilledUnexpectedly()
                     begin()
                 } else {
                     shutdown(exitApp = false)
@@ -244,6 +247,8 @@ class PingService : Service() {
             val intent = Intent(context, PingService::class.java).setAction(ACTION_START)
             if (Build.VERSION.SDK_INT >= 26) context.startForegroundService(intent) else context.startService(intent)
         }
+
+        val isAlive: Boolean get() = instance != null
 
         /** In-app stop: stops the service but keeps the app open. */
         fun stop() {

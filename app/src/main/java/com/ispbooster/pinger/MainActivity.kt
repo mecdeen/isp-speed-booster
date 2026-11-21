@@ -42,6 +42,8 @@ class MainActivity : Activity() {
     private lateinit var toggleButton: Button
     private lateinit var batteryBanner: View
     private lateinit var configSummary: TextView
+    private lateinit var lockBanner: View
+    private var lockGuideShownThisSession = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +72,18 @@ class MainActivity : Activity() {
         findViewById<View>(R.id.settingsButton).setOnClickListener(openSettings)
         configSummary.setOnClickListener(openSettings)
 
+        // Fresh process + user wanted it running + no service alive = we were killed (e.g. Recents cleared, not locked).
+        if (savedInstanceState == null && prefs.shouldRun && !PingService.isAlive) prefs.markKilledUnexpectedly()
+
+        lockBanner = findViewById(R.id.lockBanner)
+        findViewById<Button>(R.id.lockHowButton).setOnClickListener {
+            RecentsLock.showGuide(this, prefs) { renderLockBanner() }
+        }
+        findViewById<Button>(R.id.lockDoneButton).setOnClickListener {
+            prefs.confirmLock()
+            renderLockBanner()
+        }
+
         findViewById<View>(R.id.developerCredit).setOnClickListener {
             runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(DEVELOPER_URL))) }
         }
@@ -79,7 +93,15 @@ class MainActivity : Activity() {
         super.onResume()
         batteryBanner.visibility = if (BatteryHelper.isIgnoringOptimizations(this)) View.GONE else View.VISIBLE
         configSummary.text = getString(R.string.config_summary_profile, getString(prefs.profile.titleRes))
+        renderLockBanner()
         handler.post(ticker)
+    }
+
+    private fun renderLockBanner() {
+        lockBanner.visibility = if (RecentsLock.shouldRemind(prefs)) View.VISIBLE else View.GONE
+        findViewById<TextView>(R.id.lockText).setText(
+            if (prefs.killedUnexpectedly) R.string.lock_body_killed else R.string.lock_body,
+        )
     }
 
     override fun onPause() {
@@ -114,6 +136,11 @@ class MainActivity : Activity() {
         }
         PingService.start(this)
         render()
+        // Right after starting is the moment the lock matters: guide once per app session if still needed.
+        if (RecentsLock.shouldRemind(prefs) && !lockGuideShownThisSession) {
+            lockGuideShownThisSession = true
+            RecentsLock.showGuide(this, prefs) { renderLockBanner() }
+        }
     }
 
     private fun render() {
